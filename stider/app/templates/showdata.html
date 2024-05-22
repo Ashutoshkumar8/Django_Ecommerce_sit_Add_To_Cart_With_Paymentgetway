@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>h1 {
+        color:#c00;
+        font-family:sans-serif;
+        font-size:2em;
+        margin-bottom:0;
+      }
+      
+      table {  
+        font-family:sans-serif;
+        th, td {
+          padding:.25em .5em;
+          text-align:left;
+          &:nth-child(2) {
+            text-align:right;
+          }
+        }
+        td {
+          background-color:#eee;    
+        }
+        th {
+          background-color:#009;
+          color:#fff;
+        }
+      }
+      
+      .zigzag {
+        border-collapse:separate;
+        border-spacing:.25em 1em;
+        tbody tr:nth-child(odd) {
+          transform:rotate(2deg);
+        }
+        thead tr,
+        tbody tr:nth-child(even) {
+          transform:rotate(-2deg);
+        }
+      }
+    </style>
+</head>
+<body>
+    <h1>User data</h1>
+    <form action="/search" method="GET">
+        {% csrf_token %}
+        <input type="search" name="email" placeholder="Search...">
+        <button type="submit">Search</button>
+      </form>
+<table class="zigzag">
+  <thead>
+    <tr>
+      <th class="header">Name</th>
+      <th class="header">Email</th>
+      <th class="header">Phone No</th>
+      <th class="header">Password</th>
+    </tr>
+  </thead>
+  {% for i in key %}
+  <tbody>
+    <tr>
+      <td>{{i.name}}</td>
+      <td>{{i.email}}</td>
+      <td>{{i.phone}}</td>
+      <td>{{i.password}}</td>
+      <td>
+        <a href="{% url 'delet' i.id %}">delet</a>
+    </td>
+    
+    </tr>
+    {% endfor %}
+  </tbody>
+</table>
+</body>
+</html>

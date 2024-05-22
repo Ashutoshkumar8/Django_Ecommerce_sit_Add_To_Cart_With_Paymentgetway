@@ -1,0 +1,125 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="login.css">
+    <title>Document</title>
+    <style>
+        *{
+            margin: 0%;
+            padding: 0%;
+            box-sizing: border-box;
+        }
+        body{
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            background-image: url(i1.jpg);
+        }
+        .box{
+            position: relative;
+            width: 400px;
+            height: 400px;
+            background-color: black;
+            overflow: hidden;
+            border-radius: 10%;
+        }
+        .box::before{
+            content: '';
+            position: absolute;
+            inset: -15px 20px;
+            transition: 0.5s;
+            background: linear-gradient(315deg,red,yellow);
+            animation: animation 4s linear infinite;
+        }
+        .box:hover::before{
+            inset: -90px -90px;
+        }
+        @keyframes animation{
+            0%{
+                transform: rotate(0deg);
+            }
+            0%{
+                transform: rotate(360deg);
+            }
+        
+        }
+        .box::after{
+            content: '';
+            position: absolute;
+            inset: 6px;
+            background: beige;
+            border-radius: 10%;
+            z-index: 1;
+        }
+        .con{
+            z-index: 3;
+            position: absolute;
+            inset: 20px;
+            border: 6px solid black;
+            border-radius: 10%;
+            padding: 2%;
+            overflow: hidden;
+            justify-content: center;
+            align-items: center;
+        }
+        .con h1{
+            position: absolute;
+            object-fit: cover;
+            transition: 0.5s;
+            pointer-events: none;
+            background: linear-gradient(red, yellow);
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            padding: 40%;
+        }
+        .box:hover .con h1{
+            opacity: 0;
+        }
+        .box .con .form{
+            padding: 15%;
+        }
+        .box .con .form p{
+            font-size: 25px;
+            padding: 2%;
+            color: brown;
+        }
+        .box .con .form input{
+            width: 100%;
+            height: 35px;
+            padding: 2%;
+        }
+        .box .con .form .btn{
+            padding: 4%;
+            margin-top: 30px;
+            border-radius: 5px;
+            background-color: green;
+        }
+        .box .con .form .btn:hover{
+            box-shadow: 0px 0px 5px green,
+            0px 0px 30px green,
+            0px 0px 90px green;
+        }
+    </style>
+</head>
+<body>
+    <div class="box">
+        <div class="con">
+            <h1>Login</h1>
+            <form action="" method="POST" class="form">
+                {% csrf_token %}
+                {{error}}
+                <p>Email</p><input type="text" placeholder="Email" name="email">
+                <p>Password</p><input type="password" placeholder="Password" name="password">
+                <br>
+                <button class="btn">Login</button>
+            </form>
+        </div>
+    </div>
+    
+</body>
+</html>
